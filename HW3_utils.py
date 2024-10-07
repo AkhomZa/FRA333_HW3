@@ -76,4 +76,3 @@ def FKHW3(q):
     return R,P,R_e,p_e
 
 
-
