@@ -8,12 +8,27 @@
 '''
 
 import HW3_utils as FK
+import roboticstoolbox as rtb
 import numpy as np
+
+from spatialmath import SE3
+from spatialmath.base import tr2rpy
+from spatialmath.base import *
 from math import pi
 
+q = [0,0,0]
 #===========================================<ตรวจคำตอบข้อ 1>====================================================#
 #code here
-
+R,P,R_e,p_e = FK.FKHW3(q)
+robot = rtb.DHRobot(
+    [
+        rtb.RevoluteMDH(a=0,alpha=0,d=0.0892,offset=pi), #frame1
+        rtb.RevoluteMDH(a=0,alpha = pi/2,d=0), #frame2
+        rtb.RevoluteMDH(a=-0.425,alpha=0,d=0), #frame3
+    ],tool = SE3(p_e - P[:,2]) * SE3.RPY(0,-pi/2,0,order='zyx')
+)
+print(p_e,P[:,2],p_e - P[:,2])
+robot.plot(q,block=True)   
 #==============================================================================================================#
 #===========================================<ตรวจคำตอบข้อ 2>====================================================#
 #code here
