@@ -21,7 +21,6 @@ q = [0,0,0]
 #code here
 def endEffectorJacobianHW3(q:list[float])->list[float]: #รับค่า q เข้ามา
     R,P,R_e,p_e = FK.FKHW3(q)
-    # P3_e = P[:,2] - p_e
 
     num_joints = len(q) #จำนวนข้อต่อ
     J_e = np.zeros((6, num_joints)) #สร้าง matrix jacobian 6*3 ตามกำหนด
@@ -37,7 +36,7 @@ def endEffectorJacobianHW3(q:list[float])->list[float]: #รับค่า q �
         # เพิ่มเข้าไปใน Jacobian
         J_e[:3, i] = Jv_i  # Linear part
         J_e[3:, i] = Jw_i  # Angular part
-
+    #J_e[J_e < 0.000001] = 0
     return J_e
 
 
@@ -58,10 +57,11 @@ def computeEffortHW3(q:list[float], w:list[float])->list[float]:
     pass
 #==============================================================================================================#
 
-print(endEffectorJacobianHW3(q))
+print(endEffectorJacobianHW3(q)) #not correct but why?
+# print(FK.FKHW3(q)[1])
 # print(FK.FKHW3(q)[1][:,1]))
 # print(FK.FKHW3(q)[1][:,2])
 # print(FK.FKHW3(q)[1][:,3])
 #print(endEffectorJacobianHW3(q))
-print(checkSingularityHW3(q))
+#print(checkSingularityHW3(q))
 #print(np.linalg.det(endEffectorJacobianHW3(q)[:3,:3]))
