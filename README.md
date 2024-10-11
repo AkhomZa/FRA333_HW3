@@ -1,4 +1,1 @@
-ข้อ 1
-เริ่มจากการหา Rotation matrix ของแกนหมุนทั้ง 3 joint
-แกนที่ 1 เนื่องจากไม่มีหมุนแกนเมื่อเทียบกับ {0} ทำให้ Rtation matrix จึงมีค่าเป็น Identity matrix 
-เนื่องจากการวาด frame ของหุ่นยนต์ใช้แกน Z เป็นแกน
+[README.md](https://github.com/user-attachments/files/17343358/README.md)
