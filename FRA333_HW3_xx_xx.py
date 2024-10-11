@@ -56,7 +56,9 @@ def checkSingularityHW3(q:list[float])->bool:
 #code here
 def computeEffortHW3(q:list[float], w:list[float])->list[float]:
     pass
+print("test_1")
 #==============================================================================================================#
 
 print(endEffectorJacobianHW3(q))
 print(checkSingularityHW3(q))
+
