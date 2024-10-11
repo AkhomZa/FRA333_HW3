@@ -22,33 +22,34 @@ q = [0,0,0]
 def endEffectorJacobianHW3(q:list[float])->list[float]: #รับค่า q เข้ามา
     R,P,R_e,p_e = FK.FKHW3(q)
 
-    num_joints = len(q) #จำนวนข้อต่อ
-    J_e = np.zeros((6, num_joints)) #สร้าง matrix jacobian 6*3 ตามกำหนด
+    num_joints = len(q) #จำนวนข้อต่อ 3
+    J_0 = np.zeros((6, num_joints)) #สร้าง matrix jacobian 6*3 ตามกำหนด (สำหรับ J3)
+    # R0_i = [[0,0,1],[-np.sin(q[0]),np.cos(q[0]),0],[-np.sin(q[0]),np.cos(q[0]),0]] #กำหนดค่าแกน Zi เทียบ Z0
     z_i = [[0,0,1],[-np.sin(q[0]),np.cos(q[0]),0],[-np.sin(q[0]),np.cos(q[0]),0]] #กำหนดค่าแกน Zi เทียบ Z0
     for i in range(num_joints): #i -> [0,1,2]
 
         P_i = P[:,i] #P01 P02 P03
 
-        Jv_i = np.cross(z_i[i], (p_e - P_i)) # Z1 x (P0e-P01) / Z2 x (P0e-P02) / Z3 x (P0e-P03)
+        Jv_i = np.cross(z_i[i] , (p_e - P_i)) # R0_1*[0,0,1] x (P0e-P01) / R0_2*[0,0,1] x (P0e-P02) / R0_3*[0,0,1] x (P0e-P03)
         # คำนวณ Angular Velocity Jacobian
         Jw_i = z_i[i]
         
         # เพิ่มเข้าไปใน Jacobian
-        J_e[:3, i] = Jv_i  # Linear part
-        J_e[3:, i] = Jw_i  # Angular part
-    #J_e[J_e < 0.000001] = 0
-    return J_e
+        J_0[:3, i] = Jv_i  # Linear part
+        J_0[3:, i] = Jw_i   # Angular part 
+    J_0[abs(J_0) < 0.0001] = 0
+    return J_0
 
 
 #==============================================================================================================#
 #=============================================<คำตอบข้อ 2>======================================================#
 #code here
 def checkSingularityHW3(q:list[float])->bool:
-    J_e = (endEffectorJacobianHW3(q))[:3,:]
+    J_e = (endEffectorJacobianHW3(q))[:3,:3]
     e_val = 0.001
     if abs(np.linalg.det(J_e)) < e_val:
-        flag = 0
-    else:flag = 1
+        flag = 1 #closed singularity
+    else:flag = 0 #normal
     return flag
 #==============================================================================================================#
 #=============================================<คำตอบข้อ 3>======================================================#
@@ -57,11 +58,5 @@ def computeEffortHW3(q:list[float], w:list[float])->list[float]:
     pass
 #==============================================================================================================#
 
-print(endEffectorJacobianHW3(q)) #not correct but why?
-# print(FK.FKHW3(q)[1])
-# print(FK.FKHW3(q)[1][:,1]))
-# print(FK.FKHW3(q)[1][:,2])
-# print(FK.FKHW3(q)[1][:,3])
-#print(endEffectorJacobianHW3(q))
-#print(checkSingularityHW3(q))
-#print(np.linalg.det(endEffectorJacobianHW3(q)[:3,:3]))
+print(endEffectorJacobianHW3(q))
+print(checkSingularityHW3(q))
