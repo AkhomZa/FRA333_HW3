@@ -85,5 +85,3 @@ print("Singularity Check:")
 print(checkSingularityHW3(q))
 print("Effort at Joints:")
 print(computeEffortHW3(q, w))
-
-
