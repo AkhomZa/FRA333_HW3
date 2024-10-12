@@ -2,12 +2,27 @@
 # FRA333_HW3
 จัดทำโดย นายคณพล กาจธัญกิจ 65340500005 และ นายอาคม สนธิขันธ์ 65340500077
 
-โปรเจคนี้ประกอบไปด้วย 2 ไฟล์หลักสำหรับการทำงาน:
+โปรแกรมนี้เป็นโปรแกรมสำหรับหา Jacobian, Singularity และ Effort ของหุ่นยนต์ RRR ที่มีลักษณะโครงสร้างดังรูปที่ 1 
 
-1. `FRA333_HW3_xx_xx.py` – ไฟล์ที่เก็บฟังก์ชันต่างๆ ที่พัฒนาสำหรับการแก้หา Jacobian, Singularity และ Effort ของหุ่นยนต์ 3-DOF
+![Example image](image/pic1.png)
+
+
+
+## ติดตั้งก่อนการใช้งาน
+
+โปรแกรมนี้ต้องการ `numpy` และ `roboticstoolbox` ในการทำงาน คุณสามารถติดตั้งได้โดยใช้คำสั่งต่อไปนี้:
+
+```bash
+pip install numpy<2
+pip3 install roboticstoolbox-python
+```
+โปรเจคนี้ประกอบไปด้วย 3 ไฟล์หลักสำหรับการทำงาน:
+
+1. `FRA333_HW3_xx_xx.py` – ไฟล์ที่เก็บฟังก์ชันต่างๆ ที่พัฒนาสำหรับการแก้หา Jacobian, Singularity และ Effort ของหุ่นยนต์
 2. `testScript.py` – สคริปต์สำหรับทดสอบฟังก์ชันที่พัฒนาในไฟล์ `FRA333_HW3_xx_xx.py` และเปรียบเทียบผลลัพธ์กับ Robotic Toolbox
-![Example image](images/pic1.png)
-## ไฟล์และฟังก์ชัน
+3. `HW3_utils.py` เป็นไฟล์สำหรับสมการ Forward Kinematics ที่ใช้ในการหา Jacobian, Singularity และ Effort ของหุ่นยนต์
+
+## Files and Functions
 
 ### 1. `FRA333_HW3_xx_xx.py`
 ไฟล์นี้ประกอบด้วยฟังก์ชันหลัก 3 ฟังก์ชันที่ใช้ในการแก้โจทย์:
@@ -16,9 +31,11 @@
   ฟังก์ชันนี้คำนวณเมทริกซ์ Jacobian สำหรับตำแหน่ง end-effector โดยรับค่ามุมข้อต่อ `q`
   - **Input**:  
     - `q`: รายการมุมข้อต่อ (จำนวน 3 ข้อสำหรับหุ่นยนต์ 3-DOF)
+
+![Example image](image/pic2.png)
   - **Output**:  
     - เมทริกซ์ Jacobian ขนาด 6x3 ซึ่งแสดงความสัมพันธ์ระหว่างความเร็วเชิงเส้นและเชิงมุม
-  
+![Example image](image/pic3.png)
 - **`checkSingularityHW3(q: list[float]) -> bool`**  
   ฟังก์ชันตรวจสอบว่าหุ่นยนต์อยู่ในสภาวะ singularity หรือไม่ โดยการคำนวณค่า determinant ของส่วนเชิงเส้นของเมทริกซ์ Jacobian
   - **Input**:  
@@ -37,7 +54,7 @@
 ### 2. `testScript.py`
 สคริปต์นี้ใช้ตรวจสอบความถูกต้องของฟังก์ชันที่พัฒนาในไฟล์ `FRA333_HW3_xx_xx.py` โดยเปรียบเทียบกับผลลัพธ์ที่ได้จาก Robotic Toolbox (`rtb`)
 
-#### คำอธิบายการทดสอบ:
+#### Test Descriptions:
 
 - **ทดสอบ Jacobian ของ end-effector**:  
   เมทริกซ์ Jacobian ที่คำนวณโดยใช้ฟังก์ชัน `endEffectorJacobianHW3` จะถูกเปรียบเทียบกับผลลัพธ์จากโมเดลของหุ่นยนต์ใน Robotic Toolbox
