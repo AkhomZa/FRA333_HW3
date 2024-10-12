@@ -8,7 +8,6 @@
 import HW3_utils as FK
 import roboticstoolbox as rtb
 import numpy as np
-
 from spatialmath import SE3
 from spatialmath.base import tr2rpy
 from spatialmath.base import *
