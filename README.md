@@ -4,7 +4,7 @@
 
 โปรแกรมนี้เป็นโปรแกรมสำหรับหา Jacobian, Singularity และ Effort ของหุ่นยนต์ RRR ที่มีลักษณะโครงสร้างดังรูปที่ 1 
 
-![Example image](image/pic1.png)
+![Example image](pic1.png)
 
 
 
