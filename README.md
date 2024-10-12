@@ -18,18 +18,18 @@ pip3 install roboticstoolbox-python
 ```
 โปรเจคนี้ประกอบไปด้วย 3 ไฟล์หลักสำหรับการทำงาน:
 
-1. `FRA333_HW3_xx_xx.py` – ไฟล์ที่เก็บฟังก์ชันต่างๆ ที่พัฒนาสำหรับการแก้หา Jacobian, Singularity และ Effort ของหุ่นยนต์
-2. `testScript.py` – สคริปต์สำหรับทดสอบฟังก์ชันที่พัฒนาในไฟล์ `FRA333_HW3_xx_xx.py` และเปรียบเทียบผลลัพธ์กับ Robotic Toolbox
+1. `FRA333_HW3_6505_6577.py` – ไฟล์ที่เก็บฟังก์ชันต่างๆ ที่พัฒนาสำหรับการแก้หา Jacobian, Singularity และ Effort ของหุ่นยนต์
+2. `testScript.py` – สคริปต์สำหรับทดสอบฟังก์ชันที่พัฒนาในไฟล์ `FRA333_HW3_6505_6577.py` และเปรียบเทียบผลลัพธ์กับ Robotic Toolbox
 3. `HW3_utils.py` เป็นไฟล์สำหรับสมการ Forward Kinematics ที่ใช้ในการหา Jacobian, Singularity และ Effort ของหุ่นยนต์
 
 ## วิธีการ run โปรแกรม
 
-1. run ไฟล์ `FRA333_HW3_xx_xx.py` เพื่อเรียกใช้ฟังก์ชันและแสดงผลลัพธ์ของแต่ละปัญหา
+1. run ไฟล์ `FRA333_HW3_6505_6577.py` เพื่อเรียกใช้ฟังก์ชันและแสดงผลลัพธ์ของแต่ละปัญหา
 2. ใช้ไฟล์ `testScript.py` เพื่อตรวจสอบความถูกต้องของฟังก์ชันเทียบกับผลลัพธ์จาก Robotic Toolbox
 
 ## Files and Functions
 
-## `FRA333_HW3_xx_xx.py`
+## `FRA333_HW3_6505_6577.py`
 ไฟล์นี้ประกอบด้วยฟังก์ชันหลัก 3 ฟังก์ชัน:
 
 ### 1.**`endEffectorJacobianHW3(q: list[float]) -> list[float]`**  
@@ -142,7 +142,7 @@ pip3 install roboticstoolbox-python
     ```
 
 ## `testScript.py`
-สคริปต์นี้ใช้ตรวจสอบความถูกต้องของฟังก์ชันที่พัฒนาในไฟล์ `FRA333_HW3_xx_xx.py` โดยเปรียบเทียบกับผลลัพธ์ที่ได้จาก Robotic Toolbox (`rtb`)
+สคริปต์นี้ใช้ตรวจสอบความถูกต้องของฟังก์ชันที่พัฒนาในไฟล์ `FRA333_HW3_6505_6577.py` โดยเปรียบเทียบกับผลลัพธ์ที่ได้จาก Robotic Toolbox (`rtb`)
 
 #### Test Descriptions:
 
@@ -180,7 +180,7 @@ pip3 install roboticstoolbox-python
   ```
   e_val = 0.001
   ```
-  ใช้โค้ดชุดเดี่ยวกันกับในไฟล์ FRA333_HW3_xx_xx.py แต่เปลี่ยรนจาก np.linalg.det(J_e) เป็น np.linalg.det(sol_linear) เพื่อหา singularity ที่อิงจาก roboticstoolbox
+  ใช้โค้ดชุดเดี่ยวกันกับในไฟล์ FRA333_HW3_6505_6577.py แต่เปลี่ยรนจาก np.linalg.det(J_e) เป็น np.linalg.det(sol_linear) เพื่อหา singularity ที่อิงจาก roboticstoolbox
   ```
   if abs(np.linalg.det(sol_linear)) < e_val:
     flag = 1 # อยู่ในสภาวะ singularity
