@@ -1,54 +1,54 @@
 
-# FRA333_HW3_xx_xx
+# FRA333_HW3
 จัดทำโดย นายคณพล กาจธัญกิจ 65340500005 และ นายอาคม สนธิขันธ์ 65340500077
 
-This repository contains two main files for the assignment:
+โปรเจคนี้ประกอบไปด้วย 2 ไฟล์หลักสำหรับการทำงาน:
 
-1. `FRA333_HW3_xx_xx.py` – Contains the functions developed for solving inverse kinematics problems and other related computations.
-2. `testScript.py` – A script to test the functions implemented in `FRA333_HW3_xx_xx.py` and compare results with the `Robotic Toolbox`.
-
-## Files and Functions
+1. `FRA333_HW3_xx_xx.py` – ไฟล์ที่เก็บฟังก์ชันต่างๆ ที่พัฒนาสำหรับการแก้หา Jacobian, Singularity และ Effort ของหุ่นยนต์ 3-DOF
+2. `testScript.py` – สคริปต์สำหรับทดสอบฟังก์ชันที่พัฒนาในไฟล์ `FRA333_HW3_xx_xx.py` และเปรียบเทียบผลลัพธ์กับ Robotic Toolbox
+![Example image](images/pic1.png)
+## ไฟล์และฟังก์ชัน
 
 ### 1. `FRA333_HW3_xx_xx.py`
-This file contains three main functions used to solve the assignment:
+ไฟล์นี้ประกอบด้วยฟังก์ชันหลัก 3 ฟังก์ชันที่ใช้ในการแก้โจทย์:
 
 - **`endEffectorJacobianHW3(q: list[float]) -> list[float]`**  
-  Computes the Jacobian matrix for the end-effector given the joint angles `q`.
+  ฟังก์ชันนี้คำนวณเมทริกซ์ Jacobian สำหรับตำแหน่ง end-effector โดยรับค่ามุมข้อต่อ `q`
   - **Input**:  
-    - `q`: List of joint angles (size 3 for a 3-DOF robot).
+    - `q`: รายการมุมข้อต่อ (จำนวน 3 ข้อสำหรับหุ่นยนต์ 3-DOF)
   - **Output**:  
-    - A 6x3 Jacobian matrix representing linear and angular velocity relationships.
+    - เมทริกซ์ Jacobian ขนาด 6x3 ซึ่งแสดงความสัมพันธ์ระหว่างความเร็วเชิงเส้นและเชิงมุม
   
 - **`checkSingularityHW3(q: list[float]) -> bool`**  
-  Checks if the robot is in a singular configuration by computing the determinant of the linear part of the Jacobian matrix.
+  ฟังก์ชันตรวจสอบว่าหุ่นยนต์อยู่ในสภาวะ singularity หรือไม่ โดยการคำนวณค่า determinant ของส่วนเชิงเส้นของเมทริกซ์ Jacobian
   - **Input**:  
-    - `q`: List of joint angles (size 3).
+    - `q`: รายการมุมข้อต่อ (จำนวน 3 ข้อ)
   - **Output**:  
-    - A boolean flag (`True` if the robot is in a singular configuration, `False` otherwise).
+    - ค่าบูลีน (`True` หากหุ่นยนต์อยู่ในสภาวะ singularity, `False` หากไม่อยู่ในสภาวะดังกล่าว)
   
 - **`computeEffortHW3(q: list[float], w: list[float]) -> list[float]`**  
-  Computes the required joint torques given the joint angles `q` and an external wrench `w`.
+  ฟังก์ชันคำนวณแรงบิดที่ต้องการสำหรับข้อต่อโดยรับมุมข้อต่อ `q` และเวกเตอร์ wrench ภายนอก `w`
   - **Input**:  
-    - `q`: List of joint angles (size 3).
-    - `w`: A wrench vector (size 6) containing moments and forces.
+    - `q`: รายการมุมข้อต่อ (จำนวน 3 ข้อ)
+    - `w`: เวกเตอร์ wrench (ขนาด 6) ที่ประกอบด้วยโมเมนต์และแรง
   - **Output**:  
-    - List of torques required at each joint.
+    - รายการแรงบิดที่จำเป็นสำหรับแต่ละข้อต่อ
 
 ### 2. `testScript.py`
-This script verifies the correctness of the functions implemented in `FRA333_HW3_xx_xx.py` by comparing them with the results obtained using the Robotic Toolbox (`rtb`).
+สคริปต์นี้ใช้ตรวจสอบความถูกต้องของฟังก์ชันที่พัฒนาในไฟล์ `FRA333_HW3_xx_xx.py` โดยเปรียบเทียบกับผลลัพธ์ที่ได้จาก Robotic Toolbox (`rtb`)
 
-#### Test Descriptions:
+#### คำอธิบายการทดสอบ:
 
-- **Test for end-effector Jacobian**:  
-  The Jacobian matrix computed using `endEffectorJacobianHW3` is compared with the result from the Robotic Toolbox model of the robot.
+- **ทดสอบ Jacobian ของ end-effector**:  
+  เมทริกซ์ Jacobian ที่คำนวณโดยใช้ฟังก์ชัน `endEffectorJacobianHW3` จะถูกเปรียบเทียบกับผลลัพธ์จากโมเดลของหุ่นยนต์ใน Robotic Toolbox
 
-- **Test for singularity**:  
-  The singularity check function is tested by verifying the determinant of the linear part of the Jacobian using both the custom implementation and Robotic Toolbox.
+- **ทดสอบ singularity**:  
+  ฟังก์ชันตรวจสอบ singularity จะถูกทดสอบโดยการตรวจสอบค่า determinant ของส่วนเชิงเส้นของ Jacobian ทั้งจากการคำนวณแบบกำหนดเองและ Robotic Toolbox
 
-- **Test for joint torques**:  
-  The joint torques calculated using `computeEffortHW3` are compared with the values computed using the Robotic Toolbox based on the same input wrench.
+- **ทดสอบแรงบิดที่ข้อต่อ**:  
+  แรงบิดที่ข้อต่อที่คำนวณได้จากฟังก์ชัน `computeEffortHW3` จะถูกเปรียบเทียบกับค่าแรงบิดที่ได้จาก Robotic Toolbox โดยใช้ wrench เดียวกัน
 
-## How to Run
+## วิธีการรันโปรแกรม
 
-1. Run `FRA333_HW3_xx_xx.py` to execute the functions and display outputs for each problem.
-2. Use `testScript.py` to validate the functions against the results obtained using Robotic Toolbox.
+1. รันไฟล์ `FRA333_HW3_xx_xx.py` เพื่อเรียกใช้ฟังก์ชันและแสดงผลลัพธ์ของแต่ละปัญหา
+2. ใช้ไฟล์ `testScript.py` เพื่อตรวจสอบความถูกต้องของฟังก์ชันเทียบกับผลลัพธ์จาก Robotic Toolbox
